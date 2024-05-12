@@ -8,6 +8,7 @@ from voicebox.effects import Vocoder, Normalize
 from pynput.keyboard import Key, Controller
 import sys
 import os
+import pyautogui
 
 PIXEL_LOCATION = (2044, 1257)
 
@@ -21,11 +22,32 @@ voicebox = SimpleVoicebox(
 #voicebox.say("Test Test Halleulah!!")
 do_i_quit = [False] 
 
+def make_sure_not_character_select():
+    try:
+        pyautogui.locateOnScreen('FreeDuel.png')
+        pynput_keyboard.press('k')
+        sleep(0.1)
+        pynput_keyboard.release('k')
+    except Exception:
+        return
+
+def make_sure_not_card_select():
+    try:
+        pyautogui.locateOnScreen('Deck_Construct_Screen.png')
+        print("Found Deck Construction!")
+        pynput_keyboard.press('l')
+        sleep(0.1)
+        pynput_keyboard.release('l')
+    except Exception:
+        return
+
 def write_stuff(string):
     for character in string:
         if do_i_quit[0]:
             raise SystemExit
         sleep(0.5)
+        make_sure_not_character_select()
+        make_sure_not_card_select()
         match character:
             #case 'l':
             #    device.emit_click(uinput.KEY_L)
