@@ -37,12 +37,7 @@ def cardInSlot(slot_number: int) -> bool:
 
 def find_state() -> str:
     if atDeckConstruction(): return "deck_construction"
-    if atBattleSelect(): return "at_battle_select"
-    if looking_at_hand(): return "looking_at_hand"
-    if looking_at_battlefield(): return "looking_at_battlefield"
-    return "i_dunno"
-
-async def run_bot():
+    if atDeckConstruction(): return "deck_construction"
     while True:
         print("HAHA PETER I AM RUNNING")
         await sleep(1)
